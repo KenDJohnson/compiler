@@ -1,0 +1,14 @@
+program testDeclarations;
+var foo, bar : integer;
+function testFunc ( testParam : integer ) : integer ;
+begin
+    foo := 3
+end ;
+begin
+	foo := 5;
+	bar := -5;
+	write(bar - ( -foo + 2));
+	write(foo);
+	write(bar)
+end
+.

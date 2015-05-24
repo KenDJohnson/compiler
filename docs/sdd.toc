@@ -1,0 +1,15 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {chapter}{\numberline {2}Overview}{4}
+\contentsline {section}{\numberline {2.1}Scanner}{4}
+\contentsline {section}{\numberline {2.2}Recognizer}{4}
+\contentsline {section}{\numberline {2.3}Parser}{4}
+\contentsline {subsection}{\numberline {2.3.1}Symbol Table}{4}
+\contentsline {subsection}{\numberline {2.3.2}Syntax Tree}{5}
+\contentsline {section}{\numberline {2.4}Code Generator}{5}
+\contentsline {chapter}{\numberline {3}Scanner}{6}
+\contentsline {chapter}{\numberline {4}Recognizer}{7}
+\contentsline {chapter}{\numberline {5}Parser}{8}
+\contentsline {chapter}{\numberline {6}Code Generator}{9}
+\contentsline {chapter}{\numberline {7}Appendices}{10}
+\contentsline {section}{\numberline {7.1}Appendix A: Grammar}{10}

@@ -1,0 +1,29 @@
+program testDeclarations;
+var foo, bar : integer;
+var foobar, mtp, dvd, plu, min : integer;
+begin
+	foo := 5;
+	bar := 12;
+	plu := 2 + foo;
+	plu := plu + bar;
+	plu := 2 + 4;
+	plu := foo + 3;
+	write (plu);
+	min := 2 - 5;
+	min := 2 - foo;
+	min := bar - 7;
+	min := bar - foo;
+	write (min);
+	dvd := 12 / 2;
+	dvd := 12 / bar;
+	dvd := bar / 2;
+	dvd := bar / foo;
+	write (dvd);
+	mtp := 2 * 5;
+	mtp := 2 * foo;
+	mtp := bar * 5;
+	mtp := foo * bar;
+	write (mtp);
+	foobar := bar * foo + 3;
+end
+.

@@ -1,0 +1,63 @@
+\documentclass[12pt]{scrreprt}
+\newcommand{\tab}{\hspace*{2em}}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+\author{Ken Johnson}
+\title{Pascal Compiler User Manual}
+
+\begin{document}
+\maketitle
+
+The Pascal Compiler, pascalc, is a packaged Java program. As such it should be
+completely cross platform, as long as you have JRE 1.7+ installed. The program
+can be run with the Java Virtual Machine from a terminal like so:\\
+\texttt{java -jar pascalc.jar <file.pas> }\\
+The first parameter should be the filename of the Pascal code you wish to compile.
+The MIPS assembly code will be generated to the current directory. The generated
+file will have the file extension .asm, and the name of the file will be the
+program name, i.e. the string following program, and preceding ; on the first
+line of the Pascal file. Optionally the third command line argument can be
+-p, which will print the syntax tree, which is the internal representation of
+the Pascal code.\par\noindent
+
+If errors are encountered during the compilation process, an error message
+will be printed, along with the line number it occurred on. The program
+will then exit with an error code corresponding to the error encountered.
+These error codes can be seen as follows: \\
+
+2: TOKEN\_NOT\_AVAILABLE will occur when something is not matched at the end. For
+example, if there is no end. for the main there will not be a token available.\\
+
+2: TOKEN\_MISMATCH will occur when a certain token is expected, but there was another
+token in its place.\\
+
+
+
+4: AFTER\_PROGRAM handles the error in which the semicolon after program is not 
+present. \\
+
+
+5: PROGRAM\_NOT\_FOUND is the error thrown when the first line does not
+contain program \verb|<|programname ;\verb|>|. \\
+
+
+8: EXPECTED\_EOF error occurs when there is extra text after the end. for the
+main of the program. \\
+
+
+9: COMPOUND\_STMT\_SEMICOLON is thrown when there is a semicolon after the
+last statement in a compound statement. \\
+
+
+10: VARIABLE\_NOT\_DEC occurs when an attempt to use a variable that has not
+been declared. \\
+
+11: ASSIGN\_REAL\_TO\_INT error is thrown when a real number is attempted to
+be assigned into an integer variable. \\
+
+
+12: REAL\_INT\_COMPARISON is thrown when a real number and an integer are compared. \\
+
+
+\end{document}

@@ -1,0 +1,16 @@
+program testArray;
+var listOfInts : array [ 47 : 22 ] of integer;
+function testFunc ( testParam : integer ) : integer ;
+	var random : integer;
+	procedure testProc;
+		begin
+		end ;
+	begin
+	end ;
+function secondFunc ( anotherParam : real ) : real ;
+	var anotherLocal : real ;
+	begin
+	end ;
+begin
+end
+.

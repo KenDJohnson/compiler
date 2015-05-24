@@ -1,0 +1,215 @@
+\documentclass[12pt]{scrreprt}
+\newcommand{\tab}{\hspace*{2em}}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\begin{document}
+The testing for the recognizer consisted of looping through an array of
+filenames and creating a new recognizer for each one, testing the
+contents of the file to see if it is syntaxically correct. The testing
+of the scanner is embedded in to this testing, as it must properly
+recognize and the tokens and send them to the recognizer. The files
+used are as follows:\\
+\\
+An empty Pascal file:\\
+\\
+\tab  program testProg;\\
+\tab  begin\\
+\tab	end\\
+\tab .\\
+\\
+Testing declarations:\\
+\\
+\tab	program testDeclarations;\\
+\\
+\tab	var foo, bar : integer;\\
+\tab	var foobar : real;\\
+\tab	begin\\
+\tab	end\\
+\tab	.\\
+\\
+Testing array declarations:\\
+\\
+\tab	program testArray;\\
+\tab	var listOfInts : array [ 47 : 22 ] of integer\\;
+\tab	begin\\
+\tab	end\\
+\tab	.\\
+	\\
+Testing a function declaration with a compound declaration inside that
+has one ID in it, should be a procedure call.\\
+\\
+\tab	program testArray;\\
+\tab	var listOfInts : array [ 47 : 22 ] of integer;\\
+\tab	function testFunc ( testParam : integer ) : integer ;\\
+\tab	begin\\
+\tab	random\\
+\tab	end ;\\
+\tab	begin\\
+\tab	end\\
+\tab	.\\
+\\
+Testing the same function declaration with two IDs in it, which should not
+compile (and it does not)\\
+\\
+\tab	program testArray;\\
+\tab	var listOfInts : array [ 47 : 22 ] of integer;\\
+\tab	function testFunc ( testParam : integer ) : integer ;\\
+\tab	begin\\
+\tab	isnt correct\\
+\tab	end ;\\
+\tab	begin\\
+\tab	end\\
+\tab	.\\
+
+\section{Second Phase, Parsing and Code Generation}
+
+To ensure the compiler worked properly, a 	happy path'' Pascal file was
+created. This tested edge cases for all different kinds of conditions.
+In addition to this program that compiles properly, there are different 
+programs to test that each of the errors will be handled properly.
+\\
+\subsection{Testing Good Code}
+This first first program is a follows:\\
+
+
+program happyPath ; \\
+var foo, bar : integer ;\\
+var foobar, pi : real ;\\
+begin\\
+\tab	foo := 2;\\
+\tab	bar := 10;\\
+\tab	pi := 3.1415 ;\\
+\tab	foobar := pi / 2 ;\\
+\tab	if foobar \verb|<| pi then\\
+\tab\tab		write(foobar)\\
+\tab	else\\
+\tab\tab		begin\\
+\tab\tab	end\\
+\tab	if foobar \verb|>| pi then\\
+\tab\tab		begin\\
+\tab\tab 		end\\
+\tab	else\\
+\tab\tab		begin\\
+\tab\tab\tab			write(pi)\\
+\tab\tab		end\\
+\tab	if 2 \verb|<|\verb|>| 3 then\\
+\tab\tab		write(5)\\
+\tab	else\\
+\tab\tab		begin\\
+\tab\tab		end\\
+\tab	if 2 + 2 = 4 then\\
+\tab\tab		write(4)\\
+\tab	else\\
+\tab\tab		begin\\
+\tab\tab		end\\
+\tab	if not (2 + 2 = 4) then\\
+\tab\tab		write(4)\\
+\tab	else\\
+\tab\tab		begin\\
+\tab\tab		write(5)\\
+\tab\tab		end\\
+\tab	foobar := 2*pi + 2 / 17 * 2.7183;\\
+\tab	write(foobar);\\
+\tab	while bar \verb|>| 0 do\\
+\tab	begin\\
+\tab\tab		bar := bar - 1;\\
+\tab\tab		write(bar)\\
+\tab	end\\
+	\\
+
+end . 
+
+
+
+This starts by testing the declarations of integers and reals. Next basic assignment
+is tested, followed by a series of if statements. Each of these if statements
+check whether the boolean evaluations of expressions work properly
+both for reals and integers, while simulaneously checking the write()
+method. A more complicated assignment is created next, to ensure the proper
+evaluation of a complex operation tree. Next a while loop is tested, to 
+ensure it terminates at the proper step, and there are no off by one errors
+in the code generation.
+
+
+\subsection{Testing Bad Pascal Code}
+The next series of tests consist of different cases that will cause compilation
+
+TOKEN\_MISMATCH will occurr when a certain token is expected, but there was another
+token in its place.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+\tab foo := < 23 \\
+end . \\
+
+
+AFTER\_PROGRAM handles the error in which the semicolon after program is not 
+present.
+
+program tmm  \\
+var foo : integer ; \\
+begin \\
+\tab foo := < 23 \\
+end . \\
+
+PROGRAM\_NOT\_FOUND is the error thrown when the first line does not
+contain program \verb|<|programname ;\verb|>|.
+
+var foo : integer ; \\
+begin \\
+\tab foo := < 23 \\
+end . \\
+
+EXPECTED\_EOF error occurrs when there is extra text after the end. for the
+main of the program.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+\tab foo :=  23 \\
+end . \\
+var foobar : integer ; \\
+
+
+COMPOUND\_STMT\_SEMICOLON is thrown when there is a semicolon after the
+last statement in a compound statement.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+\tab foo :=  23 ; \\
+end . \\
+
+VARIBLE\_NOT\_DEC occurrs when an attempt to use a variable that has not
+been declared.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+\tab bar :=  23  \\
+end . \\
+
+ASSIGN\_REAL\_TO\_INT error is thrown when a real number is attempted to
+be assigned into an integer variable.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+\tab foo :=  23.22  \\
+end . \\
+
+REAL\_INT\_COMPARISON is thrown when a real number and an integer are compared.
+
+program tmm ; \\
+var foo : integer ; \\
+begin \\
+if 1 \verb|>| 55.5 then \\
+\tab	begin \\
+\tab	end \\
+else \\
+\tab	begin \\
+\tab	end \\
+end . \\
+
+\end{document}

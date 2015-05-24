@@ -1,0 +1,42 @@
+Ken Johnson
+lexical units for scanner
+
+reserved words:
+PLUS                    +
+MINUS                   -
+MULTIPLY                *
+DIVIDE                  /
+ASSIGN                  :=
+LEFT_PARENTHESIS        (
+RIGHT_PARENTHESIS       )
+LEFT_SQUARE_BRACKET     [
+RIGHT_SQUARE_BRACKET    ]
+GREATER_THAN            >
+LESS_THAN               <
+GREATER_THAN_EQUAL      >=
+LESS_THAN_EQUAL         <=
+LESS_THAN_GREATER_THAN  <>
+EQUALS                  =
+COMMA                   ,
+PERIOD                  .
+SEMICOLON               ;
+ID                      
+NUMBER                  
+COMMENT                 { * }
+COLON                   :
+PROGRAM                 program
+ARRAY                   array
+VAR                     var
+INTEGER                 integer
+REAL                    real
+FUNCTION                function
+PROCEDURE               procedure
+BEGIN                   begin
+END                     end
+IF                      if
+THEN                    then
+ELSE                    else
+WHILE                   while
+DO                      do
+OF                      of
+NOT                     not

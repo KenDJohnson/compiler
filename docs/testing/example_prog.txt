@@ -1,0 +1,121 @@
+program ABasicProgram ;
+var foo : integer ;
+{****************************************}
+{* Programmer: Bert G. Wachsmuth        *}
+{* Date:       Sept. 28, 1995           *}
+{*                                      *}
+{* This program converts degree Celcius *}
+{* to and from degree Fahrenheit. The   *}
+{* user can choose the conversion from  *}
+{* a menu.                              *} 
+{****************************************}
+
+var
+   UserInput  : real; { number to convert}
+   var Answer     : real; { converted answer }
+
+{****************************************}
+procedure ShowTheMenu;
+{ This procedure shows the available     }
+{ options to the user of the program.    }
+begin
+        somethinghere;
+        somethinelse
+end;
+
+{****************************************}
+procedure GetUserChoice;
+{ This procedure asks the user for their }
+{ choice and stores the result in        }
+{ UserMenuChoice.      }
+begin
+    READLN(UserChoice);
+end;
+
+{****************************************}
+procedure GetNumberToConvert;
+{ Asks the user for the number to be     }
+{ converted                              }
+begin
+   READLN(UserInput);
+end;
+
+{****************************************}
+procedure Wait;
+{ Holds execution until user presses     }
+{ RETURN                                 }
+begin
+    READLN;
+end;
+
+{****************************************}
+function ToFahrenheit(x: real): real;
+{ Function to convert degrees Celcius to }
+{ degree Fahrenheit.                     }
+begin
+     ToFahrenheit := 9/5 * x + 32;
+end;
+
+{****************************************}
+function ToCelcius(x: real): real;
+{ Function to convert degrees Fahrenheit }
+{ to degree Celcius.                     }
+begin
+     ToCelcius := 5/9 * (x - 32);
+end;
+
+{****************************************}
+procedure DoTheConversion;
+{ This procedure converts the number     }
+{ contained in UserInput to the degree   }
+{ according to the user's menu choice.   }
+begin
+     if (UserChoice = a) then
+        answer := ToFahrenheit(UserInput)
+     else
+        answer := ToCelcius(UserInput)
+end;
+
+{****************************************}
+procedure DisplayTheAnswer;
+{ This procedure displays the answer in  }
+{ a nice numerical format. It switches   }
+{ the title of the table displaying the  }
+{ answer depending on the user's menu    }
+{ choice.                                }
+begin
+     WRITELN;
+
+     if (UserChoice = a) then
+        WRITELN
+     else
+        begin
+        end;
+     if (UserChoice = b) then
+        WRITELN
+     else
+     begin
+     WRITELN;
+     WRITELN
+     end
+end;
+
+{****************************************}
+begin
+   UserChoice := q;
+   while (UserChoice <> x)do
+      begin
+         ShowTheMenu;
+         GetUserChoice;
+         if (UserChoice = a) then
+           begin
+              GetNumberToConvert;
+              DoTheConversion;
+              DisplayTheAnswer;
+              Wait;
+           end
+        else
+            begin
+            end
+      end
+end.

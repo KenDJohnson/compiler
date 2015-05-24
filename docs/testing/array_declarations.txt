@@ -1,0 +1,5 @@
+program testArray;
+var listOfInts : array [ 47 : 22 ] of integer;
+begin
+end
+.

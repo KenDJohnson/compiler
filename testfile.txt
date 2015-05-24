@@ -1,0 +1,5 @@
+foo := 45;
+bar := 32.5E5;
+foobar:= foo * bar;
+x := 12
+{this is a comment}

@@ -1,0 +1,3 @@
+program tna ;
+begin
+end

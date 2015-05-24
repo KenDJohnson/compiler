@@ -1,0 +1,9 @@
+program testArray;
+var listOfInts : array [ 47 : 22 ] of integer;
+function testFunc ( testParam : integer ) : integer ;
+begin
+isnt correct
+end ;
+begin
+end
+.
